@@ -34,11 +34,10 @@ app.post('/contact', function (req, res) {
 
 app.get('/', function (req, res) {
     connection.connect(function (err) {
-        let post = req.body;
-        let sql ="SELECT * FROM contact(`name`,`email`,`phone`) VALUES?"
+        let sql ="SELECT * FROM contact"
         console.log(sql);
         if (err) throw err;
-        connection.query(sql, post, function (err, result, fields) {
+        connection.query(sql, function (err, result, fields) {
             if (err) throw err;
             res.send(result);
             //end connection
