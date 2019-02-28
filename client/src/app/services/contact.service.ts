@@ -12,7 +12,7 @@ export class ContactService {
 
 
   post(Contact: Contact): Observable<object> {
-    return this.HttpClient.post('http://localhost:8080/contact', Contact);
+    return this.HttpClient.post('http://localhost:8888/contact', Contact);
 
   }
 
