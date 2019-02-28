@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService} from '../services/contact.service';
+import { ContactService } from '../services/contact.service';
 import { Router } from '@angular/router';
 import { Contact } from '../models/contact';
 
@@ -15,17 +15,17 @@ export class PageComponent implements OnInit {
   ngOnInit() {
   }
 
-addContact(name,phone,email){
+  addContact(name, phone, email) {
 
-  const contact = <Contact>{
-    name:name.value,
-    email:email.value,
-    phone:phone.value
+    const contact = <Contact>{
+      name: name.value,
+      email: email.value,
+      phone: phone.value
+    }
+
+    return this.contactService.post(contact).subscribe(res => {
+      console.log(res);
+    });
+
   }
-
-  return this.contactService.post(contact).subscribe(res => {
-    console.log(res);
-});
-
-}
 }
