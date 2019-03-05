@@ -1,0 +1,9 @@
+<app-recipe-add></app-recipe-add>
+
+<div class="row">
+  <div class="col-sm-6 mb-3" *ngFor='let r of recipes'>
+    <app-recipe-item [recipe]='r'></app-recipe-item>
+  </div>
+</div>
+
+<p> list recipes here</p>
