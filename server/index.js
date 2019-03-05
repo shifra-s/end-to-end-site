@@ -16,34 +16,57 @@ var connection = mysql.createConnection({
 
 app.use(cors());
 
+connection.connect(function(e,d){
+    if (e) console.log(e);
+    console.log('con success');
+})
+
 //insert contact into table table
 app.post('/contact', function (req, res) {
-    connection.connect(function (err) {
         let post = req.body;
         console.log(post)
         let sql ="INSERT INTO contact SET ?"
-        if (err) throw err;
         connection.query(sql, post, function (err, result, fields) {
             if (err) throw err;
+
             res.send(result);
-            //end connection
-            connection.end();
+           
         })
-    })
 });
 
 app.get('/', function (req, res) {
-    connection.connect(function (err) {
         let sql ="SELECT * FROM contact"
         console.log(sql);
-        if (err) throw err;
         connection.query(sql, function (err, result, fields) {
             if (err) throw err;
             res.send(result);
-            //end connection
-            connection.end();
-        })
     })
+});
+
+//get recipes from table
+app.get('/recipes', function (req, res) {
+        let sql ="SELECT * FROM recipe"
+        console.log(sql);
+        connection.query(sql, function (err, result, fields) {
+            if (err) throw err;
+            
+            res.send(result);
+            
+    })
+});
+
+//insert recipe into recipe table
+app.post('/recipes', function (req, res) {
+        let post = req.body;
+
+        console.log(post)
+        let sql ="INSERT INTO recipe SET ?"
+        connection.query(sql, post, function (err, result) {
+            if (err) throw err;
+            
+            res.json(result);
+            
+        })
 });
 
 app.listen(PORT, function(){
