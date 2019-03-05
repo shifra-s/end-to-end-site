@@ -1,0 +1,11 @@
+<form class="col-4">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Name" #name>
+  </div>
+  <div class="form-group">
+    <label for="instructions">Instructions</label>
+    <input type="text" class="form-control" id="instructions" placeholder="Instructions" #instructions>
+  </div>
+  <button (click)="addRecipe(name,instructions)" type="button" class="btn btn-primary">Add Recipe</button>
+</form>
