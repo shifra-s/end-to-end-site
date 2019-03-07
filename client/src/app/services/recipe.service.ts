@@ -1,22 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../models/recipe';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RecipeService {
+  private data: BehaviorSubject<any[]>;
+  private currentSubscription: Subscription;
 
-  constructor(private HttpClient: HttpClient) { }
+  constructor(private HttpClient: HttpClient) { 
+    //add behavoral subject here
+    this.data = new BehaviorSubject<any[]>([]);
 
-  post(Recipe: Recipe): Observable<object> {
-    return this.HttpClient.post('http://localhost:8888/recipes', Recipe);
+    setInterval(() => {
+      if (this.currentSubscription && !this.currentSubscription.closed) {
+        this.currentSubscription.unsubscribe();
+      }
+
+      this.currentSubscription = this.HttpClient.get<any>(environment.serverUrl+ 'recipes').subscribe(a => {
+        this.data.next(a);
+      })
+
+    }, 2 * 1000)
+    
   }
 
-  get(): Observable<object> {
-    return this.HttpClient.get('http://localhost:8888/recipes');
+  post(recipe: Recipe): Observable<any> {
+    return this.HttpClient.post<any[]>(environment.serverUrl + 'recipes', recipe)
+  }
+
+  get(): Observable<any> {
+      return this.data;
+    
   }
 
 }
