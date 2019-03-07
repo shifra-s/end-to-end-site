@@ -1,11 +1,14 @@
-<form class="col-4">
+<div>
+<form class="col-4" #myForm="ngForm">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="Name" #name>
+    <input [(ngModel)]="recipeModel.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Name">
   </div>
   <div class="form-group">
     <label for="instructions">Instructions</label>
-    <input type="text" class="form-control" id="instructions" placeholder="Instructions" #instructions>
+    <input [(ngModel)]="recipeModel.instructions" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Instructions">
   </div>
-  <button (click)="addRecipe(name,instructions)" type="button" class="btn btn-primary">Add Recipe</button>
+  <button (click)="addRecipe()" type="button" class="btn btn-primary">Add Recipe</button>
 </form>
+</div>
+
