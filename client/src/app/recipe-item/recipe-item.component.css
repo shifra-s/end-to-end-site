@@ -1,0 +1,12 @@
+.recipe-name{
+    text-transform: capitalize;
+    font-size:1.2em;
+}
+
+.card{
+    border:solid 1px rgb(60, 165, 227);
+}
+
+body{
+    margin:2%;
+}
