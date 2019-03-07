@@ -9,20 +9,21 @@ import {RecipeService} from '../services/recipe.service';
 })
 export class RecipeAddComponent implements OnInit {
 
-  constructor(private recipeService: RecipeService) { }
+  recipeModel: Recipe;
+
+  constructor(private recipeService: RecipeService) {
+    //initialize empty array
+    this.recipeModel = <Recipe>{};
+   }
 
   ngOnInit() {
   }
 
-  addRecipe(name, instructions) {
+  addRecipe() {
 
-    const recipe = <Recipe>{
-      name: name.value,
-      instructions: instructions.value
-    }
-
-    return this.recipeService.post(recipe).subscribe(res => {
-      console.log(res);
+    const subs = this.recipeService.post(this.recipeModel).subscribe(res => {
+      //console.log(res);
+      subs.unsubscribe();
     });
   }
 }
